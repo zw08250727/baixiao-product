@@ -272,5 +272,47 @@ const buttons=panels.map((p,i)=>{const b=document.createElement('button');b.type
 <style>
 #products .products-output:not(.asset-cycle) .output:nth-child(6){background:#eef5ff}
 </style>
+<style>
+#products .demo-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+#products .demo-button{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:6px 12px;border:1px solid #1476d4;border-radius:7px;background:#f4f9ff;color:#0668c6;font-size:12px;line-height:1.35;font-weight:700;text-decoration:none;transition:background .18s ease,border-color .18s ease,color .18s ease}
+#products .demo-button:hover{background:#e2efff;border-color:#075eaf;color:#064f94}
+#products .demo-button:focus-visible{outline:3px solid rgba(20,118,212,.3);outline-offset:2px}
+@media(max-width:600px){#products .demo-actions{gap:6px}#products .demo-button{flex:1 1 120px}}
+</style>
+<script>
+// 将用户提供的两段手机录屏接入销售 Bot 卡片。
+(()=>{
+  const card=[...document.querySelectorAll('#products .products-output:not(.asset-cycle) .output')]
+    .find(el=>el.querySelector('h4')?.textContent.trim()==='销售 Bot');
+  if(!card||card.querySelector('.demo-actions'))return;
+  const actions=document.createElement('div');
+  actions.className='demo-actions';
+  actions.setAttribute('aria-label','销售 Bot Demo 演示');
+  actions.innerHTML='<a class="demo-button" href="assets/demos/demo-1.mp4" target="_blank" rel="noopener">Demo 演示 1</a><a class="demo-button" href="assets/demos/demo-2.mp4" target="_blank" rel="noopener">Demo 演示 2</a>';
+  card.append(actions);
+})();
+</script>
+<script>
+// 将后台录音数据看板 Demo 接入轻量 AI 看板卡片。
+(()=>{
+  const card=[...document.querySelectorAll('#products .products-output:not(.asset-cycle) .output')]
+    .find(el=>el.querySelector('h4')?.textContent.trim()==='轻量 AI 看板');
+  if(!card||card.querySelector('.dashboard-demo'))return;
+  const actions=card.querySelector('.demo-actions')||(()=>{
+    const el=document.createElement('div');
+    el.className='demo-actions';
+    el.setAttribute('aria-label','轻量 AI 看板 Demo 演示');
+    card.append(el);
+    return el;
+  })();
+  const link=document.createElement('a');
+  link.className='demo-button dashboard-demo';
+  link.href='assets/demos/4s-management-dashboard.html';
+  link.target='_blank';
+  link.rel='noopener';
+  link.textContent='Demo 演示';
+  actions.append(link);
+})();
+</script>
 </body>
 </html>
