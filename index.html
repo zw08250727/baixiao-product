@@ -314,5 +314,55 @@ const buttons=panels.map((p,i)=>{const b=document.createElement('button');b.type
   actions.append(link);
 })();
 </script>
+<script>
+// 将知识库语音笔记 Demo 接入销售知识库卡片。
+(()=>{
+  const card=[...document.querySelectorAll('#products .products-output:not(.asset-cycle) .output')]
+    .find(el=>el.querySelector('h4')?.textContent.trim()==='销售知识库');
+  if(!card||card.querySelector('.knowledge-demo'))return;
+  const actions=card.querySelector('.demo-actions')||(()=>{
+    const el=document.createElement('div');
+    el.className='demo-actions';
+    el.setAttribute('aria-label','销售知识库 Demo 演示');
+    card.append(el);
+    return el;
+  })();
+  const link=document.createElement('a');
+  link.className='demo-button knowledge-demo';
+  link.href='https://100wiser.com/knowledgeBase?kbTab=voiceNote';
+  link.target='_blank';
+  link.rel='noopener noreferrer';
+  link.textContent='Demo 演示';
+  actions.append(link);
+})();
+</script>
+<script>
+// 将百销垂直 Agent Demo 接入销售 Agent 应用卡片。
+(()=>{
+  const card=[...document.querySelectorAll('#products .products-output:not(.asset-cycle) .output')]
+    .find(el=>el.querySelector('h4')?.textContent.trim()==='销售 Agent 应用');
+  if(!card||card.querySelector('.agent-demo'))return;
+  const actions=card.querySelector('.demo-actions')||(()=>{
+    const el=document.createElement('div');
+    el.className='demo-actions';
+    el.setAttribute('aria-label','销售 Agent 应用 Demo 演示');
+    card.append(el);
+    return el;
+  })();
+  const demos=[
+    ['市场洞察 Agent','https://www.100wiser.com/index?agent=37c77525469d44729ab32eb5f280e120'],
+    ['线索 Agent','https://www.100wiser.com/index?agent=110791c2c1914d07ae62d27d4379b17e']
+  ];
+  demos.forEach(([text,href])=>{
+    const link=document.createElement('a');
+    link.className='demo-button agent-demo';
+    link.href=href;
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.textContent=text;
+    actions.append(link);
+  });
+})();
+</script>
 </body>
 </html>
