@@ -234,5 +234,29 @@ const buttons=panels.map((p,i)=>{const b=document.createElement('button');b.type
   ret.remove();
 })();
 </script>
+<script>
+// 03 区块按“角色价值 → 销售价值 → 知识循环”的叙事顺序呈现。
+(()=>{
+  const sol=document.querySelector('#solutions');
+  if(!sol)return;
+  const heads=[...sol.querySelectorAll('.subhead')];
+  const roleHead=heads.find(el=>el.textContent.includes('角色价值与产品交付'));
+  const valueHead=heads.find(el=>el.textContent.includes('销售价值链'));
+  const cycleHead=heads.find(el=>el.textContent.includes('知识沉淀与应用循环'));
+  const valueJourney=sol.querySelector('.value-journey');
+  const valueNote=sol.querySelector('.value-note');
+  const roleTabs=sol.querySelector('.role-tabs');
+  const roleBoard=sol.querySelector('.role-board');
+  if(!roleHead||!valueHead||!valueJourney||!roleBoard)return;
+
+  roleHead.querySelector('.module-index').textContent='3.1';
+  valueHead.querySelector('.module-index').textContent='3.2';
+  cycleHead?.querySelector('.module-index')?.replaceChildren(document.createTextNode('3.3'));
+
+  const roleBlock=[roleHead,roleTabs,roleBoard].filter(Boolean);
+  const valueBlock=[valueHead,valueJourney,valueNote].filter(Boolean);
+  valueHead.before(...roleBlock,...valueBlock);
+})();
+</script>
 </body>
 </html>
