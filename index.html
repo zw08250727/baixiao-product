@@ -258,5 +258,19 @@ const buttons=panels.map((p,i)=>{const b=document.createElement('button');b.type
   valueHead.before(...roleBlock,...valueBlock);
 })();
 </script>
+<script>
+// 补充面向门店与现场作业的低打扰硬件采集形态。
+(()=>{
+  const grid=document.querySelector('#products .products-output:not(.asset-cycle)');
+  if(!grid||[...grid.querySelectorAll('.output h4')].some(h=>h.textContent.trim()==='多种硬件形态'))return;
+  const card=document.createElement('article');
+  card.className='output hardware-forms';
+  card.innerHTML='<h4>多种硬件形态</h4><p>智能工牌、超薄录音卡等按岗位与场景灵活配置。员工早上领取并佩戴，授权后开启持续录音；下班归还充电仓，设备自动充电并上传数据，尽量不打扰日常工作。</p><span class="output-use">产品形态：智能工牌 · 录音卡 · 充电仓</span>';
+  grid.append(card);
+})();
+</script>
+<style>
+#products .products-output:not(.asset-cycle) .output:nth-child(6){background:#eef5ff}
+</style>
 </body>
 </html>
